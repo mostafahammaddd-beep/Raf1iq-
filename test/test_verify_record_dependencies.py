@@ -27,15 +27,21 @@ class RecordDependencyCompatibilityTests(unittest.TestCase):
         )
         workflow = "\n".join(path.read_text(encoding="utf-8") for path in workflow_files)
         self.assertIn("record: ^6.2.1", pubspec)
+        verify_command = 'python3 scripts/verify_record_dependencies.py "$RUNNER_TEMP/rafiq-pub-deps.json"'
         self.assertIn(
-            "scripts/verify_record_dependencies.py",
+            verify_command,
             workflow,
-            "The workflow must check resolved record package versions before building.",
+            "The workflow must execute scripts/verify_record_dependencies.py on Pub's actual resolved graph.",
         )
         self.assertIn(
-            "flutter pub deps --json",
+            'flutter pub deps --json > "$RUNNER_TEMP/rafiq-pub-deps.json"',
             workflow,
-            "The workflow must inspect the dependency graph resolved by Pub.",
+            "The workflow must export Pub's resolved dependency graph as JSON.",
+        )
+        self.assertLess(
+            workflow.index('run: flutter pub get'),
+            workflow.index('flutter pub deps --json > "$RUNNER_TEMP/rafiq-pub-deps.json"'),
+            "The dependency verifier must run after flutter pub get.",
         )
 
     def test_accepts_compatible_record_6_graph(self):
