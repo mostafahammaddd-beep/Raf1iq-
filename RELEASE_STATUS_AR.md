@@ -1,4 +1,4 @@
-# حالة إصدار رَفِيق 0.4.5 — تقرير صريح
+# حالة إصدار رَفِيق 0.4.6 — تقرير صريح
 
 ## ما تم تنفيذه
 
@@ -41,11 +41,11 @@
 لم تتوفر أداة Flutter/Dart داخل بيئة تجهيز هذه الحزمة، لذلك يجب تأكيد النتيجة النهائية من `flutter analyze` في CI.
 
 
-## تحديث 0.4.5 — تعارض record_linux في Flutter 3.47.x
+## تحديث 0.4.6 — تعارض record_linux في Flutter 3.47.x
 
 - رُفعت `record` من `^5.2.1` إلى `^6.2.1`، وهي نسخة مناسبة لحدّ Dart 3.5+ المعلن في المشروع.
 - أضيف سكربت `scripts/verify_record_dependencies.py` ليؤكد أن `record >=6.2.1 <7`, و`record_linux >=1.3.1 <2`, و`record_platform_interface >=1.6.0 <2` بعد حلّ الاعتماديات.
 - أضيف فحص السكربت في GitHub Actions قبل `flutter analyze` والبناء.
-- عُدّلت أسماء Artifacts إلى `rafiq-v0.4.5-arm64-apk` و`rafiq-v0.4.5-arm32-apk`.
+- عُدّلت أسماء Artifacts إلى `rafiq-v0.4.6-arm64-apk` و`rafiq-v0.4.6-arm32-apk`.
 
 لم يُنفّذ Flutter/Dart محليًا في بيئة تجهيز الأرشيف؛ نجاح الإصلاح النهائي يتأكد عند تشغيل workflow.

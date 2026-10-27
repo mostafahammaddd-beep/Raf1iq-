@@ -1,4 +1,6 @@
 import pathlib
+import contextlib
+import io
 import sys
 import unittest
 from unittest import mock
@@ -23,7 +25,7 @@ class ResolveModelRevisionTests(unittest.TestCase):
                 "GITHUB_ENV": str(env_path),
             }, clear=False), mock.patch.object(
                 resolver, "resolve_revision", return_value="0123456789abcdef0123456789abcdef01234567"
-            ):
+            ), contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(resolver.main(), 0)
             self.assertIn("revision=0123456789abcdef0123456789abcdef01234567", output_path.read_text())
             self.assertIn("QURAN_LAB_REVISION=0123456789abcdef0123456789abcdef01234567", env_path.read_text())

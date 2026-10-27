@@ -11,10 +11,32 @@ from scripts.verify_record_dependencies import validate_graph  # noqa: E402
 class RecordDependencyCompatibilityTests(unittest.TestCase):
     def test_pubspec_and_workflow_include_the_compatibility_fix(self):
         pubspec = (ROOT / "pubspec.yaml").read_text(encoding="utf-8")
-        workflow = (ROOT / ".github" / "workflows" / "android_build.yml").read_text(encoding="utf-8")
+        workflow_dir = ROOT / ".github" / "workflows"
+        self.assertTrue(
+            workflow_dir.is_dir(),
+            "GitHub Actions workflow directory .github/workflows is missing. "
+            "Restore the workflow folder at the repository root; do not upload only source/test files.",
+        )
+        workflow_files = sorted(
+            path for path in workflow_dir.iterdir()
+            if path.is_file() and path.suffix.lower() in {".yml", ".yaml"}
+        )
+        self.assertTrue(
+            workflow_files,
+            "No workflow YAML exists in .github/workflows; restore the Android build workflow.",
+        )
+        workflow = "\n".join(path.read_text(encoding="utf-8") for path in workflow_files)
         self.assertIn("record: ^6.2.1", pubspec)
-        self.assertIn("scripts/verify_record_dependencies.py", workflow)
-        self.assertIn("flutter pub deps --json", workflow)
+        self.assertIn(
+            "scripts/verify_record_dependencies.py",
+            workflow,
+            "The workflow must check resolved record package versions before building.",
+        )
+        self.assertIn(
+            "flutter pub deps --json",
+            workflow,
+            "The workflow must inspect the dependency graph resolved by Pub.",
+        )
 
     def test_accepts_compatible_record_6_graph(self):
         graph = {
