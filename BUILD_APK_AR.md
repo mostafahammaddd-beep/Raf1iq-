@@ -1,4 +1,4 @@
-# بناء APK لرَفِيق 0.4.6 على GitHub Actions
+# بناء APK لرَفِيق 0.4.8 على GitHub Actions
 
 ## المتطلبات
 
@@ -12,7 +12,7 @@
 
 1. ارفع محتويات الأرشيف إلى جذر المستودع واجعل `main` فرعك الأساسي، أو شغّل `Rafiq Android APK` يدويًا.
 2. يحدد workflow revision النموذج ويتحقق من النموذج والرموز والمعجم والرخصة. يُنزّل النموذج في GitHub عند غياب cache صالح.
-3. ينتج workflow APK خفيفًا لأن `assets/models/` غير مضاف إلى Flutter assets. نزّل فقط `rafiq-v0.4.6-arm64-apk` لمعظم الأجهزة أو `rafiq-v0.4.6-arm32-apk` لبعض الأجهزة الأقدم.
+3. ينتج workflow APK خفيفًا لأن `assets/models/` غير مضاف إلى Flutter assets. نزّل فقط `rafiq-v0.4.8-arm64-apk` لمعظم الأجهزة أو `rafiq-v0.4.8-arm32-apk` لبعض الأجهزة الأقدم.
 
 ## تثبيت حزمة النموذج لأول مرة
 
@@ -57,4 +57,4 @@ base64 -w 0 rafiq-release.jks  # Linux / Git Bash
 
 ## إصلاح تعارض `record_linux`
 
-يستخدم الإصدار 0.4.6 `record: ^6.2.1` بدل `^5.2.1` لتفادي تركيب نسخة `record_linux 0.7.2` غير المتوافقة مع `record_platform_interface 1.6.0`. بعد `flutter pub get` يتحقق workflow من شجرة الاعتماديات قبل التحليل والبناء، ويفشل برسالة صريحة إذا حاول محلّل Pub اختيار مجموعة غير متوافقة.
+يستخدم الإصدار 0.4.8 `record: ^6.2.1` بدل `^5.2.1` لتفادي تركيب نسخة `record_linux 0.7.2` غير المتوافقة مع `record_platform_interface 1.6.0`. بعد `flutter pub get` يتحقق workflow من شجرة الاعتماديات قبل التحليل والبناء، ويفشل برسالة صريحة إذا حاول محلّل Pub اختيار مجموعة غير متوافقة.
