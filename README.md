@@ -1,4 +1,4 @@
-# رَفِيق — إصدار المصدر 0.4.3
+# رَفِيق — إصدار المصدر 0.4.4
 
 تطبيق Flutter عربي للمصحف والحفظ والتسميع. يستخدم نموذج Quran-Lab Zipformer v3.1 محليًا عبر Sherpa-ONNX. **ملف النموذج الكبير منفصل عن APK** حتى لا تضطر إلى تنزيل نحو 110 ميجابايت مع كل تحديث للتطبيق.
 
@@ -10,7 +10,7 @@
 2. اطلب صلاحية الوصول إلى نموذج `Quran-Lab/zipformer_p-arabic-v3` على Hugging Face واقبل رخصته، ثم أنشئ read token.
 3. أضف الرمز إلى `Settings → Secrets and variables → Actions` باسم `HF_TOKEN`.
 4. ادفع commit إلى `main` أو شغّل `Actions → Rafiq Android APK → Run workflow`.
-5. نزّل `rafiq-v0.4.3-arm64-apk` لمعظم الهواتف الحديثة، أو `rafiq-v0.4.3-arm32-apk` لبعض الأجهزة الأقدم.
+5. نزّل `rafiq-v0.4.4-arm64-apk` لمعظم الهواتف الحديثة، أو `rafiq-v0.4.4-arm32-apk` لبعض الأجهزة الأقدم.
 
 ## التثبيت الأول للنموذج — مرة واحدة
 
@@ -61,3 +61,8 @@ base64 -w 0 rafiq-release.jks  # Linux / Git Bash
 ## تحقق البناء
 
 يُشغّل GitHub Actions اختبارات Python، و`dart format` و`flutter analyze` و`flutter test` ثم يبني APKs ويرفع checksums. لم يتوفر Flutter/Dart داخل بيئة إعداد الأرشيف، لذلك يجب اعتماد نتيجة GitHub Actions بوصفها فحص البناء الفعلي قبل تثبيت APK.
+
+
+### إصلاح `flutter analyze` في v0.4.4
+
+يعالج هذا الإصدار عدم توافق استدعاء FilePicker مع النسخة 11.x وبقية ملاحظات analyzer الواردة في CI. الحد الأدنى لإصدار Flutter هو 3.27.0.

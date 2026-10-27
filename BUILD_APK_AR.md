@@ -1,4 +1,4 @@
-# بناء APK لرَفِيق 0.4.3 على GitHub Actions
+# بناء APK لرَفِيق 0.4.4 على GitHub Actions
 
 ## المتطلبات
 
@@ -12,7 +12,7 @@
 
 1. ارفع محتويات الأرشيف إلى جذر المستودع واجعل `main` فرعك الأساسي، أو شغّل `Rafiq Android APK` يدويًا.
 2. يحدد workflow revision النموذج ويتحقق من النموذج والرموز والمعجم والرخصة. يُنزّل النموذج في GitHub عند غياب cache صالح.
-3. ينتج workflow APK خفيفًا لأن `assets/models/` غير مضاف إلى Flutter assets. نزّل فقط `rafiq-v0.4.3-arm64-apk` لمعظم الأجهزة أو `rafiq-v0.4.3-arm32-apk` لبعض الأجهزة الأقدم.
+3. ينتج workflow APK خفيفًا لأن `assets/models/` غير مضاف إلى Flutter assets. نزّل فقط `rafiq-v0.4.4-arm64-apk` لمعظم الأجهزة أو `rafiq-v0.4.4-arm32-apk` لبعض الأجهزة الأقدم.
 
 ## تثبيت حزمة النموذج لأول مرة
 

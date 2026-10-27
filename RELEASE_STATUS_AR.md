@@ -1,4 +1,4 @@
-# حالة إصدار رَفِيق 0.4.3 — تقرير صريح
+# حالة إصدار رَفِيق 0.4.4 — تقرير صريح
 
 ## ما تم تنفيذه
 
@@ -28,3 +28,14 @@
 - اختبارات Python: 8 اختبارات في النسخة السابقة؛ ستُعاد الآن بعد تعديل CI.
 - فحص YAML ومسارات الاستيراد النسبية: سيُعاد بعد حزم هذه النسخة.
 - لم يتوفر `flutter` أو `dart` في بيئة إعداد الأرشيف، لذلك لا يمكن الادعاء بأن `flutter analyze` أو `flutter test` أو بناء APK قد نجح محليًا. نتيجة GitHub Actions هي فحص البناء الفعلي.
+
+
+## تحديث 0.4.4 — إصلاح `flutter analyze`
+
+- استُبدل `FilePicker.platform.pickFiles(...)` بالواجهة الساكنة الصحيحة `FilePicker.pickFiles(...)` في `file_picker` 11.x.
+- أُزيل الاستيراد غير المستخدم في `adaptive_haraka_tracker.dart`، وأُضيفت كتل للأوامر الشرطية التي أبلغ عنها analyzer.
+- استُخدم initializing formal لـ `classStride` في `CtcFrameBatch`.
+- أُزيل استيراد `dart:typed_data` غير الضروري من متحكم الجلسة.
+- استُبدل `withOpacity` بـ `withValues(alpha: ...)`، ورفع الحد الأدنى المعلن لـ Flutter إلى 3.27.0 لأن `withValues` متاحة منذ Flutter 3.27.
+
+لم تتوفر أداة Flutter/Dart داخل بيئة تجهيز هذه الحزمة، لذلك يجب تأكيد النتيجة النهائية من `flutter analyze` في CI.

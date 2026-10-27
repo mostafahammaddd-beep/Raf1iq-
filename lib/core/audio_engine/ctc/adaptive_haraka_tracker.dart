@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 class HarakaEstimate {
   const HarakaEstimate({
     required this.durationMs,
@@ -40,18 +38,26 @@ class AdaptiveHarakaTracker {
     required double durationMs,
     required double confidence,
   }) {
-    if (!durationMs.isFinite || durationMs < 35 || durationMs > 650) return false;
-    if (!confidence.isFinite || confidence < 0.85 || confidence > 1.0) return false;
+    if (!durationMs.isFinite || durationMs < 35 || durationMs > 650) {
+      return false;
+    }
+    if (!confidence.isFinite || confidence < 0.85 || confidence > 1.0) {
+      return false;
+    }
 
     final double? current = baselineMs;
     if (current != null) {
       // Reject a severe outlier rather than teach the tracker from a likely
       // misalignment or elongated consonant.
       final double ratio = durationMs / current;
-      if (ratio < 0.35 || ratio > 2.8) return false;
+      if (ratio < 0.35 || ratio > 2.8) {
+        return false;
+      }
     }
     _samples.add(durationMs);
-    if (_samples.length > maxSamples) _samples.removeAt(0);
+    if (_samples.length > maxSamples) {
+      _samples.removeAt(0);
+    }
     return true;
   }
 
@@ -93,7 +99,9 @@ class HarakaRangeAssessment {
 
   bool? get withinRange {
     final double? value = estimate.estimatedHarakat;
-    if (value == null || minimum > maximum) return null;
+    if (value == null || minimum > maximum) {
+      return null;
+    }
     return value >= minimum && value <= maximum;
   }
 }
@@ -102,7 +110,9 @@ class HarakaRangeAssessment {
 double medianDurationMs(Iterable<double> values) {
   final List<double> sorted = values.where((double value) => value.isFinite).toList()
     ..sort();
-  if (sorted.isEmpty) return double.nan;
+  if (sorted.isEmpty) {
+    return double.nan;
+  }
   final int middle = sorted.length ~/ 2;
   return sorted.length.isOdd
       ? sorted[middle]

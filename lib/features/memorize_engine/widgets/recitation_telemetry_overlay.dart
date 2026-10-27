@@ -72,7 +72,7 @@ class RecitationTelemetryOverlay extends StatelessWidget {
         margin: const EdgeInsets.only(top: 12),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: colors.surfaceContainerHighest.withOpacity(0.55),
+          color: colors.surfaceContainerHighest.withValues(alpha: 0.55),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(color: colors.outlineVariant),
         ),

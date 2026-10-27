@@ -16,10 +16,9 @@ class CtcFrameBatch {
     required this.blankId,
     this.globalStartFrame = 0,
     int? frameStride,
-    int classStride = 1,
+    this.classStride = 1,
     this.source = 'raw_ctc_backend',
-  })  : frameStride = frameStride ?? classCount,
-        classStride = classStride {
+  }) : frameStride = frameStride ?? classCount {
     if (frameCount <= 0) throw ArgumentError.value(frameCount, 'frameCount');
     if (classCount <= 1) throw ArgumentError.value(classCount, 'classCount');
     if (blankId < 0 || blankId >= classCount) {

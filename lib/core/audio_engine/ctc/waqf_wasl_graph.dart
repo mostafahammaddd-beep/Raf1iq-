@@ -73,7 +73,9 @@ class WaqfWaslGraph {
     int wordIndex, {
     required PauseEvidence pause,
   }) {
-    if (wordIndex < 0 || wordIndex >= words.length) return const <PronunciationCandidate>[];
+    if (wordIndex < 0 || wordIndex >= words.length) {
+      return const <PronunciationCandidate>[];
+    }
     final PronunciationAlternatives word = words[wordIndex];
     final List<PronunciationCandidate> candidates = <PronunciationCandidate>[
       PronunciationCandidate(

@@ -37,7 +37,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
 
   Future<void> _pickModelFiles() async {
     try {
-      final FilePickerResult? result = await FilePicker.platform.pickFiles(
+      final FilePickerResult? result = await FilePicker.pickFiles(
         type: FileType.any,
         allowMultiple: true,
         withData: false,

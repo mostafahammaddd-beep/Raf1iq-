@@ -61,7 +61,9 @@ class ModelLoaderService {
     final String manifestPath = p.join(dir.path, manifestFilename);
     final File manifestFile = File(manifestPath);
     final Map<String, dynamic>? manifest = await _readManifest(manifestFile);
-    if (manifest == null || !_validManifestMetadata(manifest)) return null;
+    if (manifest == null || !_validManifestMetadata(manifest)) {
+      return null;
+    }
 
     final File modelFile = File(modelPath);
     final File tokensFile = File(tokensPath);
@@ -105,15 +107,21 @@ class ModelLoaderService {
     ];
     for (final String legacyTag in legacyTags) {
       final File legacyMarker = File(p.join(dir.path, '.ready_$legacyTag'));
-      if (!await legacyMarker.exists()) continue;
+      if (!await legacyMarker.exists()) {
+        continue;
+      }
       final String legacyExpected =
           '$legacyTag|$modelHash|$tokensHash|$lexiconHash|$licenseHash';
-      if ((await legacyMarker.readAsString()).trim() != legacyExpected) continue;
+      if ((await legacyMarker.readAsString()).trim() != legacyExpected) {
+        continue;
+      }
       final bool hashesMatch =
           await _sha256File(modelFile) == modelHash &&
           await _sha256File(tokensFile) == tokensHash &&
           await _sha256File(lexiconFile) == lexiconHash;
-      if (!hashesMatch) continue;
+      if (!hashesMatch) {
+        continue;
+      }
       await marker.writeAsString(markerValue, flush: true);
       return _paths(modelPath, tokensPath, lexiconPath, manifest);
     }
@@ -301,7 +309,9 @@ class ModelLoaderService {
   Future<Map<String, dynamic>?> _readManifest(File file) async {
     try {
       final dynamic decoded = jsonDecode(await file.readAsString());
-      if (decoded is Map<String, dynamic>) return decoded;
+      if (decoded is Map<String, dynamic>) {
+        return decoded;
+      }
     } catch (_) {
       // Invalid/incomplete manifest means the model pack is not ready.
     }
@@ -313,7 +323,9 @@ class ModelLoaderService {
     final Map<int, String> byId = <int, String>{};
     for (final String raw in lines) {
       final String line = raw.trim();
-      if (line.isEmpty) continue;
+      if (line.isEmpty) {
+        continue;
+      }
       final int separator = line.lastIndexOf(RegExp(r'\s'));
       if (separator <= 0 || separator >= line.length - 1) {
         throw const FormatException('صيغة tokens.txt غير صالحة.');
